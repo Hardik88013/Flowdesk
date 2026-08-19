@@ -21,7 +21,7 @@ export default function Home() {
       <Navbar />
 
       {/* Main Content Sections */}
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         {/* 1. Hero Section with Miniature Interactive Workflow */}
         <Hero />
 

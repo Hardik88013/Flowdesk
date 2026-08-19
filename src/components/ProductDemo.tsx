@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container } from "./Container";
 import { Badge } from "./Badge";
 import { Button } from "./Button";
-import { Card } from "./Card";
+import { Kbd } from "./Kbd";
 import { cn } from "@/lib/utils";
 import {
   UserPlus,
@@ -13,18 +13,9 @@ import {
   Mail,
   Play,
   CheckCircle2,
-  Sliders,
-  Sparkles,
-  Zap,
-  Layers,
-  ArrowDown,
-  ArrowRight,
-  ChevronRight,
-  RotateCcw,
-  Clock,
-  Terminal,
   Activity,
-  Code2,
+  ChevronRight,
+  Copy,
   Check,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -32,6 +23,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export interface DemoNode {
   id: string;
   stepNumber: string;
+  keyNumber: string;
   type: "Trigger" | "Compute" | "Integration" | "Action";
   title: string;
   shortDesc: string;
@@ -53,11 +45,12 @@ const demoNodes: DemoNode[] = [
   {
     id: "node-1",
     stepNumber: "01",
+    keyNumber: "1",
     type: "Trigger",
     title: "New Lead",
     shortDesc: "Inbound form webhook received",
     fullDesc:
-      "Listens for incoming webhook events from your marketing forms. Automatically validates incoming JSON against schema definitions.",
+      "Listens for incoming webhook events from your marketing forms. Automatically validates incoming JSON against schema definitions with zero cold starts.",
     status: "Active",
     icon: UserPlus,
     iconBg: "bg-[#EEF4FD]",
@@ -78,6 +71,7 @@ const demoNodes: DemoNode[] = [
   {
     id: "node-2",
     stepNumber: "02",
+    keyNumber: "2",
     type: "Compute",
     title: "Qualify Lead",
     shortDesc: "Evaluates company size & intent",
@@ -103,6 +97,7 @@ const demoNodes: DemoNode[] = [
   {
     id: "node-3",
     stepNumber: "03",
+    keyNumber: "3",
     type: "Integration",
     title: "CRM Update",
     shortDesc: "Creates verified customer record",
@@ -128,6 +123,7 @@ const demoNodes: DemoNode[] = [
   {
     id: "node-4",
     stepNumber: "04",
+    keyNumber: "4",
     type: "Action",
     title: "Email Notification",
     shortDesc: "Dispatches personalized welcome kit",
@@ -156,9 +152,28 @@ export function ProductDemo() {
   const [selectedNodeId, setSelectedNodeId] = useState<string>("node-1");
   const [isRunning, setIsRunning] = useState(false);
   const [runningStepIndex, setRunningStepIndex] = useState<number | null>(null);
+  const [copiedPayload, setCopiedPayload] = useState(false);
 
   const selectedNode =
     demoNodes.find((n) => n.id === selectedNodeId) || demoNodes[0];
+
+  // Number key shortcuts [1, 2, 3, 4] for instant node switching
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement
+      ) {
+        return;
+      }
+      const match = demoNodes.find((n) => n.keyNumber === e.key);
+      if (match) {
+        setSelectedNodeId(match.id);
+      }
+    };
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, []);
 
   const handleRunSimulation = () => {
     if (isRunning) return;
@@ -166,7 +181,6 @@ export function ProductDemo() {
     setRunningStepIndex(0);
     setSelectedNodeId("node-1");
 
-    // Sequential step simulation
     setTimeout(() => {
       setRunningStepIndex(1);
       setSelectedNodeId("node-2");
@@ -188,10 +202,18 @@ export function ProductDemo() {
     }, 2000);
   };
 
+  const handleCopyPayload = () => {
+    navigator.clipboard.writeText(
+      JSON.stringify(selectedNode.samplePayload, null, 2)
+    );
+    setCopiedPayload(true);
+    setTimeout(() => setCopiedPayload(false), 2000);
+  };
+
   return (
     <section
       id="product-demo"
-      className="py-16 sm:py-24 border-t border-[#ECEAE4] bg-[#FAF9F5] scroll-mt-16"
+      className="py-16 sm:py-24 border-t border-[#ECEAE4] bg-[#FAF9F5] scroll-mt-16 overflow-hidden"
     >
       <Container size="default">
         {/* Two-Column Grid Layout on Desktop */}
@@ -216,7 +238,6 @@ export function ProductDemo() {
 
             {/* Three Concise Capabilities */}
             <div className="space-y-4 pt-2">
-              {/* Capability 1: Trigger */}
               <div className="p-4 rounded-xl bg-white border border-[#ECEAE4] shadow-[0_1px_2px_rgba(17,19,21,0.02)] space-y-1.5">
                 <div className="flex items-center gap-2">
                   <div className="w-6 h-6 rounded-md bg-[#EEF4FD] text-[#0B63E5] flex items-center justify-center text-xs font-bold border border-[#C6DBFA]/60">
@@ -232,7 +253,6 @@ export function ProductDemo() {
                 </p>
               </div>
 
-              {/* Capability 2: Connect */}
               <div className="p-4 rounded-xl bg-white border border-[#ECEAE4] shadow-[0_1px_2px_rgba(17,19,21,0.02)] space-y-1.5">
                 <div className="flex items-center gap-2">
                   <div className="w-6 h-6 rounded-md bg-[#F5F3FF] text-[#7C3AED] flex items-center justify-center text-xs font-bold border border-[#DDD6FE]/60">
@@ -248,7 +268,6 @@ export function ProductDemo() {
                 </p>
               </div>
 
-              {/* Capability 3: Automate */}
               <div className="p-4 rounded-xl bg-white border border-[#ECEAE4] shadow-[0_1px_2px_rgba(17,19,21,0.02)] space-y-1.5">
                 <div className="flex items-center gap-2">
                   <div className="w-6 h-6 rounded-md bg-[#F0FDF4] text-[#15803D] flex items-center justify-center text-xs font-bold border border-[#BBF7D0]/60">
@@ -265,10 +284,17 @@ export function ProductDemo() {
               </div>
             </div>
 
-            {/* Micro instruction hint */}
+            {/* Micro instruction hint with keycaps */}
             <div className="pt-2 text-xs font-mono text-[#858997] flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-[#0B63E5]" />
-              <span>Click any workflow node on the right to inspect details.</span>
+              <span>Press</span>
+              <div className="inline-flex items-center gap-1">
+                <Kbd>1</Kbd>
+                <Kbd>2</Kbd>
+                <Kbd>3</Kbd>
+                <Kbd>4</Kbd>
+              </div>
+              <span>to switch nodes.</span>
             </div>
           </div>
 
@@ -315,7 +341,6 @@ export function ProductDemo() {
 
               {/* Builder Canvas Area */}
               <div className="p-4 sm:p-6 bg-[#FAF9F5]/30 relative">
-                {/* Subtle Dot Matrix Texture */}
                 <div
                   className="absolute inset-0 opacity-[0.35] pointer-events-none"
                   style={{
@@ -354,7 +379,6 @@ export function ProductDemo() {
                           )}
                         >
                           <div className="flex items-center justify-between gap-3">
-                            {/* Left: Icon & Text */}
                             <div className="flex items-center gap-3">
                               <div
                                 className={cn(
@@ -382,8 +406,11 @@ export function ProductDemo() {
                               </div>
                             </div>
 
-                            {/* Right: Status Pill & Arrow */}
                             <div className="flex items-center gap-2 shrink-0">
+                              <Kbd className="hidden sm:inline-flex opacity-60 group-hover:opacity-100">
+                                {node.keyNumber}
+                              </Kbd>
+
                               <span
                                 className={cn(
                                   "text-[10px] font-mono px-2 py-0.5 rounded border",
@@ -406,7 +433,6 @@ export function ProductDemo() {
                           </div>
                         </div>
 
-                        {/* Subtle Connecting Line between Nodes */}
                         {index < demoNodes.length - 1 && (
                           <div className="flex items-center justify-center my-[-3px] relative z-10">
                             <div className="h-3 w-0.5 bg-[#D8D6CD] relative">
@@ -427,13 +453,12 @@ export function ProductDemo() {
                 </div>
               </div>
 
-              {/* Node Details Inspection Panel (Shown when selected) */}
+              {/* Node Details Inspection Panel */}
               <div className="p-4 sm:p-5 border-t border-[#ECEAE4] bg-white">
                 <div className="space-y-3">
-                  {/* Details Header */}
                   <div className="flex items-center justify-between text-xs">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-[#858997]">Selected Node:</span>
+                      <span className="font-mono text-[#858997]">Selected:</span>
                       <span className="font-semibold text-[#111315]">
                         {selectedNode.title}
                       </span>
@@ -442,18 +467,37 @@ export function ProductDemo() {
                       </Badge>
                     </div>
 
-                    <div className="flex items-center gap-1.5 text-xs font-mono text-[#15803D]">
-                      <CheckCircle2 className="w-3.5 h-3.5" />
-                      <span>Status: {selectedNode.status}</span>
+                    <div className="flex items-center gap-2 text-xs font-mono">
+                      <button
+                        type="button"
+                        onClick={handleCopyPayload}
+                        className="flex items-center gap-1 text-[11px] text-[#858997] hover:text-[#111315] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#0B63E5] rounded px-1.5 py-0.5 bg-[#FAF9F5] border border-[#ECEAE4]"
+                        aria-label="Copy sample payload"
+                      >
+                        {copiedPayload ? (
+                          <>
+                            <Check className="w-3 h-3 text-[#15803D]" />
+                            <span className="text-[#15803D]">Copied</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-3 h-3" />
+                            <span>Copy Payload</span>
+                          </>
+                        )}
+                      </button>
+
+                      <span className="text-[#15803D] flex items-center gap-1">
+                        <CheckCircle2 className="w-3.5 h-3.5" />
+                        <span>Status: {selectedNode.status}</span>
+                      </span>
                     </div>
                   </div>
 
-                  {/* Node Purpose & Explanation */}
                   <p className="text-xs text-[#575A65] leading-relaxed">
                     {selectedNode.fullDesc}
                   </p>
 
-                  {/* Configuration Attributes */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-[#ECEAE4]/80 text-[11px] font-mono">
                     <div className="p-2 rounded-lg bg-[#FAF9F5] border border-[#ECEAE4]">
                       <span className="text-[#858997] block text-[10px] uppercase">
