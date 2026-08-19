@@ -16,6 +16,7 @@ export { WorkflowCanvas } from "./WorkflowCanvas";
 export { Hero } from "./Hero";
 export { ProductDemo } from "./ProductDemo";
 export type { DemoNode } from "./ProductDemo";
+export { HowItWorks } from "./HowItWorks";
 export { EngineFeatures } from "./EngineFeatures";
 export { BlueprintGallery } from "./BlueprintGallery";
 export { DeveloperExperience } from "./DeveloperExperience";

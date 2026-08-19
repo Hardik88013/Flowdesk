@@ -2,6 +2,7 @@ import {
   Navbar,
   Hero,
   ProductDemo,
+  HowItWorks,
   EngineFeatures,
   BlueprintGallery,
   DeveloperExperience,
@@ -22,25 +23,28 @@ export default function Home() {
         {/* 1. Hero Section with Miniature Interactive Workflow */}
         <Hero />
 
-        {/* 2. Main Product Demonstration (Interactive Dashboard & Node Selection) */}
+        {/* 2. Main Product Demonstration (Interactive Dashboard) */}
         <ProductDemo />
 
-        {/* 3. Deterministic Engine Architecture & Interactive Tabs */}
+        {/* 3. Editorial How It Works Section */}
+        <HowItWorks />
+
+        {/* 4. Deterministic Engine Architecture & Interactive Tabs */}
         <EngineFeatures />
 
-        {/* 4. Production Blueprints & Sequential Timelines */}
+        {/* 5. Production Blueprints & Sequential Timelines */}
         <BlueprintGallery />
 
-        {/* 5. Developer Experience & Code Terminal SDKs */}
+        {/* 6. Developer Experience & Code Terminal SDKs */}
         <DeveloperExperience />
 
-        {/* 6. Honest, Transparent Pricing Matrix */}
+        {/* 7. Honest, Transparent Pricing Matrix */}
         <PricingSection />
 
-        {/* 7. Technical FAQ Accordion */}
+        {/* 8. Technical FAQ Accordion */}
         <FAQSection />
 
-        {/* 8. Bottom Developer CTA */}
+        {/* 9. Bottom Developer CTA */}
         <CTASection />
       </main>
 
