@@ -25,3 +25,4 @@ export { PricingSection } from "./PricingSection";
 export { FAQSection } from "./FAQSection";
 export { CTASection } from "./CTASection";
 export { Footer } from "./Footer";
+export { EasterEgg } from "./EasterEgg";

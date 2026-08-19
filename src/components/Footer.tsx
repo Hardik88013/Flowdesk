@@ -1,55 +1,62 @@
 import React from "react";
 import Link from "next/link";
 import { Container } from "./Container";
-import { ArrowUpRight } from "lucide-react";
 
 export function Footer() {
-  const footerLinks = {
-    product: [
-      { label: "Visual Canvas Studio", href: "#builder" },
-      { label: "Deterministic Engine", href: "#features" },
-      { label: "Production Blueprints", href: "#workflows" },
-      { label: "Integrations & Sockets", href: "#integrations" },
-      { label: "Pricing & Quotas", href: "#pricing" },
-    ],
-    developers: [
-      { label: "TypeScript SDK", href: "#docs" },
-      { label: "Python SDK", href: "#docs" },
-      { label: "Flowdesk CLI", href: "#docs" },
-      { label: "OpenAPI 3.1 Spec", href: "#docs" },
-      { label: "GitHub Repository", href: "https://github.com", external: true },
-    ],
-    architecture: [
-      { label: "Deterministic AST Model", href: "#features" },
-      { label: "Time-Travel Traces", href: "#features" },
-      { label: "Fault Tolerance Policy", href: "#features" },
-      { label: "Self-Hosted Runners", href: "#faq" },
-      { label: "Security & Encryption", href: "#faq" },
-    ],
-    company: [
-      { label: "About Flowdesk", href: "#" },
-      { label: "System Status", href: "#", status: "Operational" },
-      { label: "Changelog", href: "#" },
-      { label: "Privacy Policy", href: "#" },
-      { label: "Terms of Service", href: "#" },
-    ],
-  };
+  const footerSections = [
+    {
+      title: "Product",
+      links: [
+        { label: "Overview", href: "#product-demo" },
+        { label: "How It Works", href: "#how-it-works" },
+        { label: "Engine Architecture", href: "#features" },
+        { label: "Production Blueprints", href: "#solutions" },
+      ],
+    },
+    {
+      title: "Solutions",
+      links: [
+        { label: "Lead Management", href: "#use-cases" },
+        { label: "Document Processing", href: "#use-cases" },
+        { label: "Team Notifications", href: "#use-cases" },
+        { label: "Data Synchronization", href: "#use-cases" },
+      ],
+    },
+    {
+      title: "Resources",
+      links: [
+        { label: "Documentation", href: "#resources" },
+        { label: "TypeScript SDK", href: "#resources" },
+        { label: "Python SDK", href: "#resources" },
+        { label: "Flowdesk CLI", href: "#resources" },
+      ],
+    },
+    {
+      title: "Company",
+      links: [
+        { label: "About", href: "#" },
+        { label: "Security", href: "#faq" },
+        { label: "Privacy Policy", href: "#" },
+        { label: "Terms of Service", href: "#" },
+      ],
+    },
+  ];
 
   return (
     <footer className="border-t border-[#ECEAE4] bg-[#FAF9F5] pt-14 pb-12 text-[#575A65]">
       <Container size="default">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12 pb-12 border-b border-[#ECEAE4]">
-          {/* Brand Column */}
-          <div className="col-span-2 space-y-4">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-8 lg:gap-12 pb-12 border-b border-[#ECEAE4]">
+          {/* Flowdesk Brand Column */}
+          <div className="col-span-2 space-y-3">
             <Link
               href="/"
               className="inline-flex items-center gap-2.5 group"
               aria-label="Flowdesk Home"
             >
-              <div className="w-7.5 h-7.5 rounded-lg bg-[#111315] flex items-center justify-center text-white shadow-sm">
+              <div className="w-7 h-7 rounded-lg bg-[#111315] flex items-center justify-center text-white shadow-2xs">
                 <svg
-                  width="16"
-                  height="16"
+                  width="15"
+                  height="15"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -70,85 +77,37 @@ export function Footer() {
               </span>
             </Link>
 
-            <p className="text-xs text-[#575A65] max-w-sm leading-relaxed">
-              The deterministic workflow automation runtime. Turn repetitive business operations into visual, type-safe execution pipelines.
+            <p className="text-xs text-[#575A65] max-w-xs leading-relaxed font-normal">
+              Visual workflow automation platform for modern teams.
             </p>
+          </div>
 
-            {/* Live Operational Status Badge */}
-            <div className="pt-2">
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-white border border-[#ECEAE4] text-xs font-mono text-[#111315] shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-[#16A34A] animate-pulse" />
-                <span>All Systems Operational</span>
-              </div>
+          {/* Nav Columns: Product, Solutions, Resources, Company */}
+          {footerSections.map((section) => (
+            <div key={section.title} className="space-y-3">
+              <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[#111315]">
+                {section.title}
+              </h4>
+              <ul className="space-y-2 text-xs">
+                {section.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="hover:text-[#111315] transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-
-          {/* Links Columns */}
-          <div className="space-y-3">
-            <h5 className="text-xs font-mono font-semibold uppercase tracking-wider text-[#111315]">
-              Product
-            </h5>
-            <ul className="space-y-2 text-xs">
-              {footerLinks.product.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="hover:text-[#111315] transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="space-y-3">
-            <h5 className="text-xs font-mono font-semibold uppercase tracking-wider text-[#111315]">
-              Developers
-            </h5>
-            <ul className="space-y-2 text-xs">
-              {footerLinks.developers.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="inline-flex items-center gap-1 hover:text-[#111315] transition-colors"
-                    {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  >
-                    <span>{link.label}</span>
-                    {link.external && <ArrowUpRight className="w-3 h-3" />}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="space-y-3">
-            <h5 className="text-xs font-mono font-semibold uppercase tracking-wider text-[#111315]">
-              Architecture
-            </h5>
-            <ul className="space-y-2 text-xs">
-              {footerLinks.architecture.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="hover:text-[#111315] transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          ))}
         </div>
 
-        {/* Bottom Sub-Footer */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#858997]">
-          <p>© {new Date().getFullYear()} Flowdesk Technologies Inc. All rights reserved.</p>
-          <div className="flex items-center gap-4 font-mono text-[11px]">
-            <span>Deterministic AST Engine</span>
-            <span>•</span>
-            <span>TypeScript & Python Native</span>
-          </div>
+        {/* Small Copyright Line */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#858997]">
+          <p>© {new Date().getFullYear()} Flowdesk. All rights reserved.</p>
+          <p className="font-mono text-[11px]">Engineered for clarity</p>
         </div>
       </Container>
     </footer>

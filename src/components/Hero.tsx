@@ -128,6 +128,19 @@ export function Hero() {
     setNodeStates(["idle", "idle", "idle", "idle"]);
   };
 
+  const [isShortcutActive, setIsShortcutActive] = useState(false);
+
+  // Easter egg listener for subtle highlight effect
+  React.useEffect(() => {
+    const handleShortcut = () => {
+      setIsShortcutActive(true);
+      setTimeout(() => setIsShortcutActive(false), 3000);
+    };
+    window.addEventListener("flowdesk:shortcut-unlocked", handleShortcut);
+    return () =>
+      window.removeEventListener("flowdesk:shortcut-unlocked", handleShortcut);
+  }, []);
+
   return (
     <section className="relative pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-24 overflow-hidden">
       <Container size="default">
@@ -175,7 +188,12 @@ export function Hero() {
         {/* Miniature Realistic Flowdesk Workflow Interface */}
         <div
           id="preview"
-          className="max-w-5xl mx-auto rounded-2xl bg-white border border-[#ECEAE4] shadow-[0_4px_24px_-4px_rgba(17,19,21,0.06),0_1px_3px_rgba(17,19,21,0.03)] overflow-hidden"
+          className={cn(
+            "max-w-5xl mx-auto rounded-2xl bg-white border transition-all duration-300 overflow-hidden",
+            isShortcutActive
+              ? "border-[#0B63E5] ring-2 ring-[#0B63E5]/40 shadow-[0_0_24px_rgba(11,99,229,0.15)]"
+              : "border-[#ECEAE4] shadow-[0_4px_24px_-4px_rgba(17,19,21,0.06),0_1px_3px_rgba(17,19,21,0.03)]"
+          )}
         >
           {/* Window Header / Toolbar */}
           <div className="flex flex-wrap items-center justify-between gap-3 px-4 sm:px-6 py-3 border-b border-[#ECEAE4] bg-[#FAF9F5]/70">

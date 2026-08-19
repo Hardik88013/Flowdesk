@@ -11,6 +11,7 @@ import {
   FAQSection,
   CTASection,
   Footer,
+  EasterEgg,
 } from "@/components";
 
 export default function Home() {
@@ -48,12 +49,15 @@ export default function Home() {
         {/* 9. Technical FAQ Accordion */}
         <FAQSection />
 
-        {/* 10. Bottom Developer CTA */}
+        {/* 10. Final Editorial CTA */}
         <CTASection />
       </main>
 
-      {/* Structured Footer */}
+      {/* Structured Minimal Footer */}
       <Footer />
+
+      {/* Subtle Developer Easter Egg (Konami Code Listener) */}
+      <EasterEgg />
     </div>
   );
 }
