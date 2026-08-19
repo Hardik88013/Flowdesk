@@ -17,6 +17,7 @@ export { Hero } from "./Hero";
 export { ProductDemo } from "./ProductDemo";
 export type { DemoNode } from "./ProductDemo";
 export { HowItWorks } from "./HowItWorks";
+export { UseCases } from "./UseCases";
 export { EngineFeatures } from "./EngineFeatures";
 export { BlueprintGallery } from "./BlueprintGallery";
 export { DeveloperExperience } from "./DeveloperExperience";

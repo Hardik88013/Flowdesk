@@ -3,6 +3,7 @@ import {
   Hero,
   ProductDemo,
   HowItWorks,
+  UseCases,
   EngineFeatures,
   BlueprintGallery,
   DeveloperExperience,
@@ -29,22 +30,25 @@ export default function Home() {
         {/* 3. Editorial How It Works Section */}
         <HowItWorks />
 
-        {/* 4. Deterministic Engine Architecture & Interactive Tabs */}
+        {/* 4. Refined Editorial Use Cases Section */}
+        <UseCases />
+
+        {/* 5. Deterministic Engine Architecture & Interactive Tabs */}
         <EngineFeatures />
 
-        {/* 5. Production Blueprints & Sequential Timelines */}
+        {/* 6. Production Blueprints & Sequential Timelines */}
         <BlueprintGallery />
 
-        {/* 6. Developer Experience & Code Terminal SDKs */}
+        {/* 7. Developer Experience & Code Terminal SDKs */}
         <DeveloperExperience />
 
-        {/* 7. Honest, Transparent Pricing Matrix */}
+        {/* 8. Honest, Transparent Pricing Matrix */}
         <PricingSection />
 
-        {/* 8. Technical FAQ Accordion */}
+        {/* 9. Technical FAQ Accordion */}
         <FAQSection />
 
-        {/* 9. Bottom Developer CTA */}
+        {/* 10. Bottom Developer CTA */}
         <CTASection />
       </main>
 
