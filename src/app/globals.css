@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+
+  /* Flowdesk Color Palette: Warm, Restrained, Editorial */
+  --color-canvas: #FAF9F5;
+  --color-canvas-subtle: #F3F2EC;
+  --color-canvas-muted: #EBE9E1;
+  
+  --color-surface: #FFFFFF;
+  --color-surface-hover: #F8F7F2;
+  --color-surface-active: #F0EFE8;
+  
+  --color-text-primary: #111315;
+  --color-text-secondary: #575A65;
+  --color-text-muted: #858997;
+  --color-text-tertiary: #A6ABB8;
+
+  --color-border-subtle: #ECEAE4;
+  --color-border-default: #E2E0D8;
+  --color-border-strong: #C8C6BC;
+  --color-border-focus: #111315;
+
+  --color-brand: #0B63E5;
+  --color-brand-hover: #084FC0;
+  --color-brand-active: #063D99;
+  --color-brand-subtle: #EEF4FD;
+  --color-brand-border: #C6DBFA;
+  
+  --color-success: #15803D;
+  --color-success-subtle: #F0FDF4;
+  --color-success-border: #BBF7D0;
+}
+
+:root {
+  --background: #FAF9F5;
+  --foreground: #111315;
+}
+
+html {
+  color-scheme: light;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: #D6E4FC;
+  color: #0B63E5;
+}
+
+/* Accessibility: Consistent focus rings */
+*:focus-visible {
+  outline: 2px solid #0B63E5;
+  outline-offset: 2px;
+}
+
+/* Tactile micro-borders & shadows */
+.card-tactile {
+  background-color: #FFFFFF;
+  border: 1px solid #ECEAE4;
+  box-shadow: 0 1px 2px 0 rgba(17, 19, 21, 0.03), 0 0 0 1px rgba(17, 19, 21, 0.02);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.card-tactile:hover {
+  border-color: #D8D5CB;
+  box-shadow: 0 4px 12px -2px rgba(17, 19, 21, 0.05), 0 0 0 1px rgba(17, 19, 21, 0.04);
+}
+
+/* Linear-style button tactile inset lighting */
+.btn-primary-tactile {
+  background-color: #111315;
+  color: #FAF9F5;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.18), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+}
+
+.btn-primary-tactile:hover {
+  background-color: #22252B;
+}
+
+.btn-secondary-tactile {
+  background-color: #FFFFFF;
+  color: #111315;
+  border: 1px solid #E2E0D8;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.8), 0 1px 2px 0 rgba(17, 19, 21, 0.03);
+}
+
+.btn-secondary-tactile:hover {
+  background-color: #F8F7F2;
+  border-color: #D4D2C8;
+}
+
+.btn-brand-tactile {
+  background-color: #0B63E5;
+  color: #FFFFFF;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.25), 0 1px 3px 0 rgba(11, 99, 229, 0.25);
+}
+
+.btn-brand-tactile:hover {
+  background-color: #084FC0;
+}
+
+/* Subtle scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF9F5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D8D6CD;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C4C2B7;
+}
