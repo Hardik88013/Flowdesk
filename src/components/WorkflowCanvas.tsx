@@ -1,29 +1,21 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Badge } from "./Badge";
 import { Button } from "./Button";
-import { Kbd } from "./Kbd";
 import {
   Play,
   RotateCcw,
   CheckCircle2,
-  Clock,
   Code2,
   Database,
   Send,
   Webhook,
-  ArrowRight,
-  Sparkles,
-  Zap,
   Activity,
-  Layers,
   ChevronRight,
-  CornerDownRight,
-  Settings2,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export interface CanvasNode {
   id: string;
@@ -281,7 +273,7 @@ export function WorkflowCanvas() {
                             )}
                           >
                             {node.status === "success" ? (
-                              <CheckCircle2 className="w-4 h-4 text-[#16A34A]" />
+                              <CheckCircle2 className="w-4 h-4 text-[#15803D]" />
                             ) : (
                               <Icon className="w-4 h-4" />
                             )}

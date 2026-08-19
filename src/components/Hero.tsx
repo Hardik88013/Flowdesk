@@ -1,25 +1,20 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container } from "./Container";
 import { Button } from "./Button";
-import { Badge } from "./Badge";
 import {
   ArrowRight,
   Play,
   RotateCcw,
   CheckCircle2,
-  Sparkles,
   UserPlus,
   Database,
   Mail,
   Loader2,
-  Clock,
   ArrowDown,
-  Layers,
   Bot,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 type WorkflowStatus = "ready" | "running" | "completed";
@@ -88,6 +83,7 @@ export function Hero() {
     "idle",
     "idle",
   ]);
+  const [isShortcutActive, setIsShortcutActive] = useState(false);
 
   const handleRunWorkflow = () => {
     if (workflowStatus === "running") return;
@@ -96,25 +92,21 @@ export function Hero() {
     setActiveStepIndex(0);
     setNodeStates(["running", "idle", "idle", "idle"]);
 
-    // Step 1 -> Step 2
     setTimeout(() => {
       setActiveStepIndex(1);
       setNodeStates(["completed", "running", "idle", "idle"]);
     }, 450);
 
-    // Step 2 -> Step 3
     setTimeout(() => {
       setActiveStepIndex(2);
       setNodeStates(["completed", "completed", "running", "idle"]);
     }, 950);
 
-    // Step 3 -> Step 4
     setTimeout(() => {
       setActiveStepIndex(3);
       setNodeStates(["completed", "completed", "completed", "running"]);
     }, 1450);
 
-    // Step 4 -> Completed
     setTimeout(() => {
       setActiveStepIndex(null);
       setNodeStates(["completed", "completed", "completed", "completed"]);
@@ -128,10 +120,8 @@ export function Hero() {
     setNodeStates(["idle", "idle", "idle", "idle"]);
   };
 
-  const [isShortcutActive, setIsShortcutActive] = useState(false);
-
   // Easter egg listener for subtle highlight effect
-  React.useEffect(() => {
+  useEffect(() => {
     const handleShortcut = () => {
       setIsShortcutActive(true);
       setTimeout(() => setIsShortcutActive(false), 3000);
@@ -292,7 +282,6 @@ export function Hero() {
               <div className="grid grid-cols-1 md:grid-cols-4 gap-3 sm:gap-4 relative items-stretch">
                 {workflowSteps.map((step, index) => {
                   const state = nodeStates[index];
-                  const isCurrent = activeStepIndex === index;
                   const Icon = step.icon;
 
                   return (

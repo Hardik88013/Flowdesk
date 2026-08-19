@@ -1,16 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 import {
   Webhook,
   Code2,
   Send,
   GitBranch,
-  CheckCircle2,
-  CircleDot,
   Clock,
-  Sparkles,
 } from "lucide-react";
 
 export type NodeType = "trigger" | "transform" | "action" | "condition";
@@ -62,7 +59,6 @@ export function WorkflowNode({
   type,
   title,
   subtitle,
-  status = "idle",
   latency,
   codeSnippet,
   className,
@@ -87,12 +83,12 @@ export function WorkflowNode({
         "group relative rounded-xl bg-[#FFFFFF] border p-4 transition-all duration-150 text-left outline-none cursor-pointer select-none",
         selected
           ? "border-[#0B63E5] ring-2 ring-[#0B63E5]/20 shadow-[0_4px_16px_rgba(11,99,229,0.08)]"
-          : "border-[#ECEAE4] hover:border-[#D8D5CB] shadow-[0_1px_3px_rgba(17,19,21,0.03)] hover:shadow-[0_4px_12px_-2px_rgba(17,19,21,0.05)]",
+          : "border-[#ECEAE4] hover:border-[#D8D5CB] shadow-[0_1px_3px_rgba(17,19,21,0.02)] hover:shadow-[0_4px_12px_-2px_rgba(17,19,21,0.05)]",
         "focus-visible:ring-2 focus-visible:ring-[#0B63E5] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FAF9F5]",
         className
       )}
     >
-      {/* Visual Input Port (Top Connection Dot) */}
+      {/* Visual Input Port */}
       <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-[#FAF9F5] border-2 border-[#D8D5CB] group-hover:border-[#0B63E5] transition-colors" />
 
       {/* Header Row */}
@@ -131,14 +127,14 @@ export function WorkflowNode({
         </p>
       </div>
 
-      {/* Code Snippet / Config Preview if present */}
+      {/* Code Snippet / Config Preview */}
       {codeSnippet && (
         <div className="mt-3 p-2 rounded-md bg-[#FAF9F5] border border-[#ECEAE4] font-mono text-[11px] text-[#575A65] overflow-x-auto">
           <code>{codeSnippet}</code>
         </div>
       )}
 
-      {/* Visual Output Port (Bottom Connection Dot) */}
+      {/* Visual Output Port */}
       <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-[#FAF9F5] border-2 border-[#D8D5CB] group-hover:border-[#0B63E5] transition-colors" />
     </div>
   );

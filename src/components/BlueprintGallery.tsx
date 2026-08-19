@@ -5,21 +5,8 @@ import { Container } from "./Container";
 import { SectionHeading } from "./SectionHeading";
 import { Badge } from "./Badge";
 import { Button } from "./Button";
-import { Card } from "./Card";
 import { cn } from "@/lib/utils";
-import {
-  CreditCard,
-  AlertTriangle,
-  Database,
-  ArrowRight,
-  Clock,
-  Zap,
-  Activity,
-  Layers,
-  ChevronRight,
-  Code2,
-  CheckCircle2,
-} from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 interface Blueprint {
   id: string;
@@ -32,10 +19,8 @@ interface Blueprint {
   steps: {
     name: string;
     action: string;
-    icon: string;
     runtime: string;
   }[];
-  specSnippet: string;
 }
 
 const blueprints: Blueprint[] = [
@@ -49,20 +34,11 @@ const blueprints: Blueprint[] = [
     avgRuntime: "64ms",
     reliability: "99.999%",
     steps: [
-      { name: "Stripe Webhook", action: "customer.subscription.created", icon: "CreditCard", runtime: "2ms" },
-      { name: "Tax Calculation", action: "POST /v2/taxes/calculate", icon: "Layers", runtime: "18ms" },
-      { name: "PostgreSQL Provision", action: "CREATE SCHEMA tenant_481", icon: "Database", runtime: "32ms" },
-      { name: "Slack Broadcast", action: "chat.postMessage (#sales)", icon: "Zap", runtime: "12ms" },
+      { name: "Stripe Webhook", action: "customer.subscription.created", runtime: "2ms" },
+      { name: "Tax Calculation", action: "POST /v2/taxes/calculate", runtime: "18ms" },
+      { name: "PostgreSQL Provision", action: "CREATE SCHEMA tenant_481", runtime: "32ms" },
+      { name: "Slack Broadcast", action: "chat.postMessage (#sales)", runtime: "12ms" },
     ],
-    specSnippet: `export default definePipeline({
-  name: "billing_provisioning",
-  trigger: stripe.events.on("customer.subscription.created"),
-  steps: [
-    taxjar.calculateTax({ customerId: $.trigger.customer }),
-    aws.rds.createTenantSchema({ tier: $.trigger.plan }),
-    slack.sendMessage({ channel: "#sales-alerts" }),
-  ],
-});`,
   },
   {
     id: "incident-triage",
@@ -74,20 +50,11 @@ const blueprints: Blueprint[] = [
     avgRuntime: "112ms",
     reliability: "99.99%",
     steps: [
-      { name: "PagerDuty Trigger", action: "incident.trigger (Sev-1)", icon: "AlertTriangle", runtime: "4ms" },
-      { name: "CloudWatch Extract", action: "query_logs({ window: '15m' })", icon: "Activity", runtime: "48ms" },
-      { name: "GitHub Commit Diff", action: "GET /repos/main/commits", icon: "Code2", runtime: "38ms" },
-      { name: "War Room Slack", action: "create_channel (#inc-1092)", icon: "Zap", runtime: "22ms" },
+      { name: "PagerDuty Trigger", action: "incident.trigger (Sev-1)", runtime: "4ms" },
+      { name: "CloudWatch Extract", action: "query_logs({ window: '15m' })", runtime: "48ms" },
+      { name: "GitHub Commit Diff", action: "GET /repos/main/commits", runtime: "38ms" },
+      { name: "War Room Slack", action: "create_channel (#inc-1092)", runtime: "22ms" },
     ],
-    specSnippet: `export default definePipeline({
-  name: "incident_triage",
-  trigger: pagerduty.events.on("incident.triggered"),
-  steps: [
-    cloudwatch.fetchErrorLogs({ timeframe: "15m" }),
-    github.getRecentDeployCommits({ env: "production" }),
-    slack.createWarRoom({ title: $.trigger.title }),
-  ],
-});`,
   },
   {
     id: "data-sync-vector",
@@ -99,20 +66,11 @@ const blueprints: Blueprint[] = [
     avgRuntime: "85ms",
     reliability: "99.99%",
     steps: [
-      { name: "PostgreSQL CDC", action: "WAL log mutation stream", icon: "Database", runtime: "5ms" },
-      { name: "Transform & Chunk", action: "chunkDocument({ size: 512 })", icon: "Layers", runtime: "12ms" },
-      { name: "Vector Embedding", action: "text-embedding-3-small", icon: "Zap", runtime: "45ms" },
-      { name: "Pinecone Upsert", action: "upsertVectors({ namespace: 'prod' })", icon: "Activity", runtime: "23ms" },
+      { name: "PostgreSQL CDC", action: "WAL log mutation stream", runtime: "5ms" },
+      { name: "Transform & Chunk", action: "chunkDocument({ size: 512 })", runtime: "12ms" },
+      { name: "Vector Embedding", action: "text-embedding-3-small", runtime: "45ms" },
+      { name: "Pinecone Upsert", action: "upsertVectors({ namespace: 'prod' })", runtime: "23ms" },
     ],
-    specSnippet: `export default definePipeline({
-  name: "cdc_vector_sync",
-  trigger: postgres.cdc.onMutation("documents"),
-  steps: [
-    text.chunkContent({ maxTokens: 512 }),
-    openai.createEmbedding({ model: "text-embedding-3-small" }),
-    pinecone.upsert({ index: "search-knowledge-base" }),
-  ],
-});`,
   },
 ];
 

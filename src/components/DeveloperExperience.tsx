@@ -3,21 +3,9 @@
 import React, { useState } from "react";
 import { Container } from "./Container";
 import { SectionHeading } from "./SectionHeading";
-import { Badge } from "./Badge";
-import { Button } from "./Button";
 import { Card } from "./Card";
 import { cn } from "@/lib/utils";
-import {
-  Terminal,
-  Code2,
-  Copy,
-  Check,
-  Zap,
-  Laptop,
-  GitPullRequest,
-  FileCode,
-  ArrowRight,
-} from "lucide-react";
+import { Copy, Check, Laptop, GitPullRequest, FileCode } from "lucide-react";
 
 export function DeveloperExperience() {
   const [activeLang, setActiveLang] = useState<"ts" | "py" | "cli">("ts");

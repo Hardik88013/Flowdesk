@@ -5,21 +5,13 @@ import { Container } from "./Container";
 import { SectionHeading } from "./SectionHeading";
 import { Badge } from "./Badge";
 import { Card } from "./Card";
-import { Button } from "./Button";
 import { cn } from "@/lib/utils";
 import {
-  GitFork,
-  Code2,
-  History,
-  ShieldAlert,
   CheckCircle2,
   Lock,
   Globe2,
   GitBranch,
-  ArrowRight,
   Terminal,
-  Layers,
-  Cpu,
   RefreshCw,
 } from "lucide-react";
 

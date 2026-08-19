@@ -5,9 +5,8 @@ import { Container } from "./Container";
 import { SectionHeading } from "./SectionHeading";
 import { Badge } from "./Badge";
 import { Button } from "./Button";
-import { Card } from "./Card";
 import { cn } from "@/lib/utils";
-import { CheckCircle2, ArrowRight, Sparkles, ShieldCheck, Zap } from "lucide-react";
+import { CheckCircle2, ArrowRight } from "lucide-react";
 
 export function PricingSection() {
   const [annualBilling, setAnnualBilling] = useState(true);

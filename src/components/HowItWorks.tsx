@@ -57,7 +57,7 @@ export function HowItWorks() {
 
           {/* Editorial 3-Step Flow */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 lg:gap-12 relative">
-            {steps.map((step, index) => (
+            {steps.map((step) => (
               <div
                 key={step.number}
                 className="relative flex flex-col justify-between pt-6 border-t border-[#ECEAE4] md:border-t-2 md:border-[#E2E0D8] space-y-6"
