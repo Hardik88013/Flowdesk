@@ -6,6 +6,9 @@ This document articulates the core architectural, engineering, and design decisi
 
 ## 1. Executive Summary
 
+- **Live Production URL**: [https://flowdesk-plum-xi.vercel.app/](https://flowdesk-plum-xi.vercel.app/)
+- **Repository**: [https://github.com/Hardik88013/Flowdesk.git](https://github.com/Hardik88013/Flowdesk.git)
+
 Flowdesk is an editorial, high-performance visual workflow automation homepage designed to convey deep product craft, realism, and engineering rigor. Rather than relying on generic SaaS marketing templates, oversized gradients, or fake social proof, the application adheres to a strict design and code philosophy: **“Simple at first glance, sophisticated when interacted with.”**
 
 ---

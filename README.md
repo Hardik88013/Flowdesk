@@ -4,7 +4,7 @@ Visual workflow automation platform for modern teams to design, automate, and mo
 
 ## Live Demo
 
-[https://flowdesk-gqi09ripq-hardik88013s-projects.vercel.app](https://flowdesk-gqi09ripq-hardik88013s-projects.vercel.app)
+[https://flowdesk-plum-xi.vercel.app/](https://flowdesk-plum-xi.vercel.app/)
 
 ## Tech Stack
 
